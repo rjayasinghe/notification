@@ -1,20 +1,16 @@
-package de.jayasinghe.samples.notification.orders;
+package de.jayasinghe.samples.notification.web;
 
 public class Customer {
 	private final String firstName;
 	private final String lastName;
 	private final String email;
 	private final String mobileNumber;
+
 	public Customer(String firstName, String lastName, String email, String mobileNumber) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.mobileNumber = mobileNumber;
-	}
-
-	@Override
-	public String toString() {
-		return "Customer{" + "firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", email='" + email + '\'' + ", mobileNumber='" + mobileNumber + '\'' + '}';
 	}
 
 	public String getFirstName() {
@@ -31,5 +27,9 @@ public class Customer {
 
 	public String getMobileNumber() {
 		return mobileNumber;
+	}
+
+	public de.jayasinghe.samples.notification.orders.Customer toCustomer() {
+		return new de.jayasinghe.samples.notification.orders.Customer(firstName, lastName, email, mobileNumber);
 	}
 }

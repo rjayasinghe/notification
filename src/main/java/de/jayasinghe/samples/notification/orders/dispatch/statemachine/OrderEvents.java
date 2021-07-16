@@ -1,4 +1,4 @@
-package de.jayasinghe.samples.notification.statemachine;
+package de.jayasinghe.samples.notification.orders.dispatch.statemachine;
 
 public enum OrderEvents {
     PLACED,

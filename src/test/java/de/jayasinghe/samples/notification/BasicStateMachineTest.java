@@ -1,7 +1,7 @@
 package de.jayasinghe.samples.notification;
 
-import de.jayasinghe.samples.notification.statemachine.OrderEvents;
-import de.jayasinghe.samples.notification.statemachine.OrderStates;
+import de.jayasinghe.samples.notification.orders.dispatch.statemachine.OrderEvents;
+import de.jayasinghe.samples.notification.orders.dispatch.statemachine.OrderStates;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

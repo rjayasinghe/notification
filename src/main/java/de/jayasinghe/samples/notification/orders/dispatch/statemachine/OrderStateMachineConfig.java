@@ -1,12 +1,12 @@
-package de.jayasinghe.samples.notification.statemachine;
+package de.jayasinghe.samples.notification.orders.dispatch.statemachine;
 
-import static de.jayasinghe.samples.notification.statemachine.OrderEvents.DELIVERED;
-import static de.jayasinghe.samples.notification.statemachine.OrderEvents.PLACED;
-import static de.jayasinghe.samples.notification.statemachine.OrderEvents.SHIPPED;
-import static de.jayasinghe.samples.notification.statemachine.OrderStates.COMPLETE;
-import static de.jayasinghe.samples.notification.statemachine.OrderStates.INITIAL;
-import static de.jayasinghe.samples.notification.statemachine.OrderStates.IN_PROCESS;
-import static de.jayasinghe.samples.notification.statemachine.OrderStates.ON_THE_ROAD;
+import static de.jayasinghe.samples.notification.orders.dispatch.statemachine.OrderEvents.DELIVERED;
+import static de.jayasinghe.samples.notification.orders.dispatch.statemachine.OrderEvents.PLACED;
+import static de.jayasinghe.samples.notification.orders.dispatch.statemachine.OrderEvents.SHIPPED;
+import static de.jayasinghe.samples.notification.orders.dispatch.statemachine.OrderStates.COMPLETE;
+import static de.jayasinghe.samples.notification.orders.dispatch.statemachine.OrderStates.INITIAL;
+import static de.jayasinghe.samples.notification.orders.dispatch.statemachine.OrderStates.IN_PROCESS;
+import static de.jayasinghe.samples.notification.orders.dispatch.statemachine.OrderStates.ON_THE_ROAD;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.statemachine.config.EnableStateMachineFactory;
