@@ -22,6 +22,14 @@ import java.util.Set;
 @Component
 public class OrderStateMachineConfig extends EnumStateMachineConfigurerAdapter<OrderStates, OrderEvents> {
 
+    private final PlacedAction placedAction;
+    private final ShippedAction shippedAction;
+
+    public OrderStateMachineConfig(PlacedAction placedAction, ShippedAction shippedAction) {
+        this.placedAction = placedAction;
+        this.shippedAction = shippedAction;
+    }
+
     @Override
     public void configure(StateMachineStateConfigurer<OrderStates, OrderEvents> states) throws Exception {
         states.withStates()
@@ -36,11 +44,13 @@ public class OrderStateMachineConfig extends EnumStateMachineConfigurerAdapter<O
                 .withExternal()
                 .source(INITIAL).target(IN_PROCESS)
                 .event(PLACED)
+                .action(placedAction)
                 .and()
                 .withExternal()
                 .source(IN_PROCESS)
                 .target(ON_THE_ROAD)
                 .event(SHIPPED)
+                .action(shippedAction)
                 .and()
                 .withExternal()
                 .source(ON_THE_ROAD)
