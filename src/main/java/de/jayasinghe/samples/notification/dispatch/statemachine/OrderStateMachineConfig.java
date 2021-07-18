@@ -43,11 +43,5 @@ public class OrderStateMachineConfig extends EnumStateMachineConfigurerAdapter<O
         transitions.withExternal().source(INITIAL).target(IN_PROCESS).event(PLACED).action(placedAction).and()
                 .withExternal().source(IN_PROCESS).target(ON_THE_ROAD).event(SHIPPED).action(shippedAction).and()
                 .withExternal().source(ON_THE_ROAD).target(COMPLETE).event(DELIVERED).action(deliveredAction);
-
-		/*
-        transitions.withExternal().source(INITIAL).target(IN_PROCESS).event(PLACED).and()
-                .withExternal().source(IN_PROCESS).target(ON_THE_ROAD).event(SHIPPED).and()
-                .withExternal().source(ON_THE_ROAD).target(COMPLETE).event(DELIVERED);
-		*/
     }
 }
