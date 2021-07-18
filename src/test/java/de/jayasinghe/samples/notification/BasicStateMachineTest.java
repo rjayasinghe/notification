@@ -31,7 +31,7 @@ class BasicStateMachineTest {
     @Test
     void testMachineCreation() {
         StateMachine<OrderStates, OrderEvents> stateMachine = factory.getStateMachine();
-        stateMachine.start();
+        stateMachine.startReactively().block();
         Assertions.assertThat(stateMachine).isNotNull();
     }
 
