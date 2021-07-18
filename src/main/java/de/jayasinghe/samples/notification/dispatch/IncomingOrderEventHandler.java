@@ -1,9 +1,11 @@
-package de.jayasinghe.samples.notification.orders.dispatch;
+package de.jayasinghe.samples.notification.dispatch;
 
-import de.jayasinghe.samples.notification.orders.OrderPlacedReceivedEvent;
-import de.jayasinghe.samples.notification.orders.OrderShippedReceivedEvent;
-import de.jayasinghe.samples.notification.orders.dispatch.statemachine.OrderEvents;
-import de.jayasinghe.samples.notification.orders.dispatch.statemachine.OrderStates;
+import de.jayasinghe.samples.notification.dispatch.statemachine.OrderEvents;
+import de.jayasinghe.samples.notification.dispatch.statemachine.OrderStates;
+import de.jayasinghe.samples.notification.events.OrderDeliveredReceivedEvent;
+import de.jayasinghe.samples.notification.events.OrderPlacedReceivedEvent;
+import de.jayasinghe.samples.notification.events.OrderShippedReceivedEvent;
+
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
@@ -34,6 +36,15 @@ public class IncomingOrderEventHandler {
 				.acquireStateMachine(orderShippedReceivedEvent.getIncomingOrder().getOrderId().toString());
 		Message<OrderEvents> message = MessageBuilder.withPayload(OrderEvents.SHIPPED)
 				.setHeader("order", orderShippedReceivedEvent.getIncomingOrder()).build();
+		orderStateMachine.sendEvent(message);
+	}
+
+	@EventListener
+	public void on(OrderDeliveredReceivedEvent orderDeliveredReceivedEvent) {
+		StateMachine<OrderStates, OrderEvents> orderStateMachine = stateMachineService
+				.acquireStateMachine(orderDeliveredReceivedEvent.getIncomingOrder().getOrderId().toString());
+		Message<OrderEvents> message = MessageBuilder.withPayload(OrderEvents.DELIVERED)
+				.setHeader("order", orderDeliveredReceivedEvent.getIncomingOrder()).build();
 		orderStateMachine.sendEvent(message);
 	}
 }

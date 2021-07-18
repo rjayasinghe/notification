@@ -1,4 +1,4 @@
-package de.jayasinghe.samples.notification.orders.dispatch.statemachine;
+package de.jayasinghe.samples.notification.dispatch.statemachine;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

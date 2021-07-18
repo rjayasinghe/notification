@@ -1,4 +1,4 @@
-package de.jayasinghe.samples.notification.orders;
+package de.jayasinghe.samples.notification;
 
 import java.util.*;
 

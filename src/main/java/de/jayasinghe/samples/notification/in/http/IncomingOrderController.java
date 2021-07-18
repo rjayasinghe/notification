@@ -1,7 +1,9 @@
-package de.jayasinghe.samples.notification.web;
+package de.jayasinghe.samples.notification.in.http;
 
-import de.jayasinghe.samples.notification.orders.OrderPlacedReceivedEvent;
-import de.jayasinghe.samples.notification.orders.OrderShippedReceivedEvent;
+import de.jayasinghe.samples.notification.events.OrderDeliveredReceivedEvent;
+import de.jayasinghe.samples.notification.events.OrderPlacedReceivedEvent;
+import de.jayasinghe.samples.notification.events.OrderShippedReceivedEvent;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
@@ -36,4 +38,11 @@ public class IncomingOrderController {
 				pizzaOrderShipped.getOrderId());
 	}
 
+	@PutMapping("/pizzaOrders/delivered")
+	public void orderDelivered(@RequestBody PizzaOrder pizzaOrderDelivered) {
+
+		applicationEventPublisher.publishEvent(new OrderDeliveredReceivedEvent(pizzaOrderDelivered.toOrder()));
+		logger.info("Received PizzaOrderDelivered {} event and it was successfully dispatched for further processing",
+				pizzaOrderDelivered.getOrderId());
+	}
 }

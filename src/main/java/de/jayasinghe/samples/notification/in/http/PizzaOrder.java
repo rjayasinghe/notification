@@ -1,6 +1,6 @@
-package de.jayasinghe.samples.notification.web;
+package de.jayasinghe.samples.notification.in.http;
 
-import de.jayasinghe.samples.notification.orders.Order;
+import de.jayasinghe.samples.notification.Order;
 
 import java.util.List;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package de.jayasinghe.samples.notification.web;
+package de.jayasinghe.samples.notification.in.http;
 
 public class Customer {
 	private final String firstName;
@@ -29,7 +29,7 @@ public class Customer {
 		return mobileNumber;
 	}
 
-	public de.jayasinghe.samples.notification.orders.Customer toCustomer() {
-		return new de.jayasinghe.samples.notification.orders.Customer(firstName, lastName, email, mobileNumber);
+	public de.jayasinghe.samples.notification.Customer toCustomer() {
+		return new de.jayasinghe.samples.notification.Customer(firstName, lastName, email, mobileNumber);
 	}
 }

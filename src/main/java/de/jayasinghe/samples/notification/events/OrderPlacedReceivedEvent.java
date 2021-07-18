@@ -1,4 +1,6 @@
-package de.jayasinghe.samples.notification.orders;
+package de.jayasinghe.samples.notification.events;
+
+import de.jayasinghe.samples.notification.Order;
 
 public class OrderPlacedReceivedEvent {
 	private final Order incomingOrder;
