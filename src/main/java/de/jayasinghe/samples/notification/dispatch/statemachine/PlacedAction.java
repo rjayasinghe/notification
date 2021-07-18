@@ -1,5 +1,6 @@
 package de.jayasinghe.samples.notification.dispatch.statemachine;
 
+import static de.jayasinghe.samples.notification.dispatch.OrderToNotificationConverter.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationEventPublisher;
@@ -8,7 +9,7 @@ import org.springframework.statemachine.action.Action;
 import org.springframework.stereotype.Component;
 
 import de.jayasinghe.samples.notification.Order;
-import de.jayasinghe.samples.notification.events.PlacedNotificationTriggered;
+import de.jayasinghe.samples.notification.events.NotificationPlacedTriggered;
 
 @Component
 public class PlacedAction implements Action<OrderStates, OrderEvents> {
@@ -22,10 +23,9 @@ public class PlacedAction implements Action<OrderStates, OrderEvents> {
 	@Override
 	public void execute(StateContext<OrderStates, OrderEvents> context) {
 		Order order = (Order) context.getMessageHeader("order");
-		applicationEventPublisher.publishEvent(new PlacedNotificationTriggered(order));
+		applicationEventPublisher.publishEvent(new NotificationPlacedTriggered(convertForPlacedOrder(order)));
 
-		logger.info("order {} was placed. state machine ID {}", order,
-				context.getStateMachine().getId());
+		logger.info("dispatched NotificationPlacedTriggered event for order with orderId {}", order.getOrderId());
 	}
 
 }

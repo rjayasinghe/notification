@@ -1,39 +1,41 @@
 package de.jayasinghe.samples.notification.out;
 
+import de.jayasinghe.samples.notification.events.NotificationDeliveredTriggered;
+import de.jayasinghe.samples.notification.events.NotificationPlacedTriggered;
+import de.jayasinghe.samples.notification.events.NotificationShippedTriggered;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
 
-import de.jayasinghe.samples.notification.dispatch.statemachine.ShippedNotificationTriggered;
-import de.jayasinghe.samples.notification.events.DeliveredNotificationTriggered;
-import de.jayasinghe.samples.notification.events.PlacedNotificationTriggered;
+import java.net.URI;
 
 @Component
 public class NotificationSender {
 	private static final Logger logger = LoggerFactory.getLogger(NotificationSender.class);
+	//private final RestTemplate restTemplate;
+	//private static final URI SMS_URI = URI.create("https://fancy-sms-service.net/send");
 
-	@EventListener
-	public void on(PlacedNotificationTriggered placedNotificationTriggered) {
-		logger.info("send orderPlaced notification for order with ID {} to {}",
-				placedNotificationTriggered.getOrder().getOrderId(),
-				placedNotificationTriggered.getOrder().getCustomer().getMobileNumber());
-
+	public NotificationSender(RestTemplate restTemplate) {
+		//this.restTemplate = restTemplate;
 	}
 
 	@EventListener
-	public void on(ShippedNotificationTriggered shippedNotificationTriggered) {
-		logger.info("send orderShipped notification for order with ID {} to {}",
-				shippedNotificationTriggered.getOrder().getOrderId(),
-				shippedNotificationTriggered.getOrder().getCustomer().getMobileNumber());
-
+	public void on(NotificationPlacedTriggered notificationPlacedTriggered) {
+		//restTemplate.postForEntity(SMS_URI, notificationPlacedTriggered.getNotification(), String.class);
+		logger.info("sent orderPlaced notification {}", notificationPlacedTriggered.getNotification());
 	}
 
 	@EventListener
-	public void on(DeliveredNotificationTriggered deliveredNotificationTriggered) {
-		logger.info("send orderDelivered notification for order with ID {} to {}",
-				deliveredNotificationTriggered.getOrder().getOrderId(),
-				deliveredNotificationTriggered.getOrder().getCustomer().getMobileNumber());
+	public void on(NotificationShippedTriggered notificationShippedTriggered) {
+		//restTemplate.postForEntity(SMS_URI, notificationShippedTriggered.getNotification(), String.class);
+		logger.info("sent orderShipped notification {}", notificationShippedTriggered.getNotification());
+	}
 
+	@EventListener
+	public void on(NotificationDeliveredTriggered notificationDeliveredTriggered) {
+		//restTemplate.postForEntity(SMS_URI, notificationDeliveredTriggered.getNotification(), String.class);
+		logger.info("sent orderDelivered notification {}", notificationDeliveredTriggered.getNotification());
 	}
 }
