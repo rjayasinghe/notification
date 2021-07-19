@@ -1,4 +1,4 @@
-package de.jayasinghe.samples.notification.out;
+package de.jayasinghe.samples.notification.out.http;
 
 import de.jayasinghe.samples.notification.events.NotificationDeliveredTriggered;
 import de.jayasinghe.samples.notification.events.NotificationPlacedTriggered;
