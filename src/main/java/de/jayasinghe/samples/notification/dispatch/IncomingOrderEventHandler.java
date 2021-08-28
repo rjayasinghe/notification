@@ -5,6 +5,7 @@ import de.jayasinghe.samples.notification.dispatch.statemachine.OrderStates;
 import de.jayasinghe.samples.notification.events.OrderDeliveredReceivedEvent;
 import de.jayasinghe.samples.notification.events.OrderPlacedReceivedEvent;
 import de.jayasinghe.samples.notification.events.OrderShippedReceivedEvent;
+import reactor.core.publisher.Mono;
 
 import org.springframework.context.event.EventListener;
 import org.springframework.messaging.Message;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class IncomingOrderEventHandler {
+	private static final String ORDER = "order";
 	private final StateMachineService<OrderStates, OrderEvents> stateMachineService;
 
 	public IncomingOrderEventHandler(StateMachineService<OrderStates, OrderEvents> stateMachineFactory) {
@@ -26,8 +28,8 @@ public class IncomingOrderEventHandler {
 		StateMachine<OrderStates, OrderEvents> orderStateMachine = stateMachineService
 				.acquireStateMachine(orderPlacedReceivedEvent.getIncomingOrder().getOrderId().toString(), true);
 		Message<OrderEvents> message = MessageBuilder.withPayload(OrderEvents.PLACED)
-				.setHeader("order", orderPlacedReceivedEvent.getIncomingOrder()).build();
-		orderStateMachine.sendEvent(message);
+				.setHeader(ORDER, orderPlacedReceivedEvent.getIncomingOrder()).build();
+		orderStateMachine.sendEvent(Mono.fromSupplier(() -> message));
 	}
 
 	@EventListener
@@ -35,8 +37,8 @@ public class IncomingOrderEventHandler {
 		StateMachine<OrderStates, OrderEvents> orderStateMachine = stateMachineService
 				.acquireStateMachine(orderShippedReceivedEvent.getIncomingOrder().getOrderId().toString());
 		Message<OrderEvents> message = MessageBuilder.withPayload(OrderEvents.SHIPPED)
-				.setHeader("order", orderShippedReceivedEvent.getIncomingOrder()).build();
-		orderStateMachine.sendEvent(message);
+				.setHeader(ORDER, orderShippedReceivedEvent.getIncomingOrder()).build();
+		orderStateMachine.sendEvent(Mono.fromSupplier(() -> message));
 	}
 
 	@EventListener
@@ -44,7 +46,7 @@ public class IncomingOrderEventHandler {
 		StateMachine<OrderStates, OrderEvents> orderStateMachine = stateMachineService
 				.acquireStateMachine(orderDeliveredReceivedEvent.getIncomingOrder().getOrderId().toString());
 		Message<OrderEvents> message = MessageBuilder.withPayload(OrderEvents.DELIVERED)
-				.setHeader("order", orderDeliveredReceivedEvent.getIncomingOrder()).build();
-		orderStateMachine.sendEvent(message);
+				.setHeader(ORDER, orderDeliveredReceivedEvent.getIncomingOrder()).build();
+		orderStateMachine.sendEvent(Mono.fromSupplier(() -> message));
 	}
 }
