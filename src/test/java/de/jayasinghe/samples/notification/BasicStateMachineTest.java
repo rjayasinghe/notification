@@ -1,33 +1,46 @@
 package de.jayasinghe.samples.notification;
 
-import de.jayasinghe.samples.notification.statemachine.OrderEvents;
-import de.jayasinghe.samples.notification.statemachine.OrderStates;
+import de.jayasinghe.samples.notification.dispatch.statemachine.DeliveredAction;
+import de.jayasinghe.samples.notification.dispatch.statemachine.OrderEvents;
+import de.jayasinghe.samples.notification.dispatch.statemachine.OrderStates;
+import de.jayasinghe.samples.notification.dispatch.statemachine.PlacedAction;
+import de.jayasinghe.samples.notification.dispatch.statemachine.ShippedAction;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.statemachine.StateMachine;
 import org.springframework.statemachine.config.StateMachineFactory;
+import org.springframework.statemachine.service.StateMachineService;
 import org.springframework.statemachine.test.StateMachineTestPlan;
 import org.springframework.statemachine.test.StateMachineTestPlanBuilder;
+
+import java.util.UUID;
 
 @SpringBootTest
 class BasicStateMachineTest {
 
-    @Autowired
-    StateMachineFactory<OrderStates, OrderEvents> factory;
+    @Autowired StateMachineService<OrderStates, OrderEvents> service;
+    @Autowired StateMachineFactory<OrderStates, OrderEvents> factory;
+
+    @MockBean PlacedAction placedAction;
+    @MockBean ShippedAction shippedAction;
+    @MockBean DeliveredAction deliveredAction;
 
     @Test
     void testMachineCreation() {
         StateMachine<OrderStates, OrderEvents> stateMachine = factory.getStateMachine();
-        stateMachine.start();
+        stateMachine.startReactively().block();
         Assertions.assertThat(stateMachine).isNotNull();
     }
 
     @Test
     void testStandardWorkflow() throws Exception {
-        StateMachine<OrderStates, OrderEvents> stateMachine = factory.getStateMachine();
-        stateMachine.start();
+        UUID stateMachineId = UUID.randomUUID();
+        //StateMachine<OrderStates, OrderEvents> stateMachine = service.acquireStateMachine(stateMachineId.toString());
+        StateMachine<OrderStates, OrderEvents> stateMachine = factory.getStateMachine(stateMachineId);
+        stateMachine.startReactively().block();
 
         StateMachineTestPlan<OrderStates, OrderEvents> plan = StateMachineTestPlanBuilder.<OrderStates, OrderEvents>builder()
                 .defaultAwaitTime(2)

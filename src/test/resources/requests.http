@@ -1,0 +1,68 @@
+POST http://localhost:8080/pizzaOrders HTTP/1.1
+content-type: application/json
+
+{
+    "orderId" : "095F72C6-8E1A-470F-9D60-48FEB83C1C65",
+    "orderedPizzas" : [
+	    {
+		    "name" : "Pizza Salame",
+		    "price" : 8.90
+	    },
+	    {
+		    "name" : "Pizza Margerita",
+		    "price" : 5.90
+	    }
+    ],
+    "customer" : {
+	    "firstName" : "Emilio",
+	    "lastname" : "Bartone",
+	    "email" : "pizzalover1989@provider.com",
+	    "mobileNumber" : "+39 065555555"
+    }
+}
+
+PUT http://localhost:8080/pizzaOrders/shipped HTTP/1.1
+content-type: application/json
+
+{
+    "orderId" : "095F72C6-8E1A-470F-9D60-48FEB83C1C65",
+    "orderedPizzas" : [
+	    {
+		    "name" : "Pizza Salame",
+		    "price" : 8.90
+	    },
+	    {
+		    "name" : "Pizza Margerita",
+		    "price" : 5.90
+	    }
+    ],
+    "customer" : {
+	    "firstName" : "Emilio",
+	    "lastname" : "Bartone",
+	    "email" : "pizzalover1989@provider.com",
+	    "mobileNumber" : "+39 065555555"
+    }
+}
+
+PUT http://localhost:8080/pizzaOrders/delivered HTTP/1.1
+content-type: application/json
+
+{
+    "orderId" : "095F72C6-8E1A-470F-9D60-48FEB83C1C65",
+    "orderedPizzas" : [
+	    {
+		    "name" : "Pizza Salame",
+		    "price" : 8.90
+	    },
+	    {
+		    "name" : "Pizza Margerita",
+		    "price" : 5.90
+	    }
+    ],
+    "customer" : {
+	    "firstName" : "Emilio",
+	    "lastname" : "Bartone",
+	    "email" : "pizzalover1989@provider.com",
+	    "mobileNumber" : "+39 065555555"
+    }
+}
