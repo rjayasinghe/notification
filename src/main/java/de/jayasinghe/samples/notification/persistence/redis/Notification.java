@@ -29,4 +29,9 @@ public class Notification implements Serializable {
     public String getMobileNumber() {
         return mobileNumber;
     }
+
+    static Notification fromDomainObject(de.jayasinghe.samples.notification.Notification notification) {
+        return new Notification(notification.getOrderId().toString(), notification.getMessage(),
+                notification.getMobileNumber());
+    }
 }
