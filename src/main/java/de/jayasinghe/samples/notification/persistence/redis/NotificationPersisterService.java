@@ -1,5 +1,7 @@
 package de.jayasinghe.samples.notification.persistence.redis;
 
+import static de.jayasinghe.samples.notification.persistence.redis.Notification.fromDomainObject;
+
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,6 @@ public class NotificationPersisterService {
 
 	@EventListener
 	public void consumeNotificationEvent(final NotificationEvent notificationEvent) {
-		notificationRepository.save(Notification.fromDomainObject(notificationEvent.getNotification()));
+		notificationRepository.save(fromDomainObject(notificationEvent.getNotification()));
 	}
 }
