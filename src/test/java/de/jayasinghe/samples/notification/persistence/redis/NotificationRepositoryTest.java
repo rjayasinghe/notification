@@ -1,4 +1,4 @@
-package de.jayasinghe.samples.notification.persistence;
+package de.jayasinghe.samples.notification.persistence.redis;
 
 import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;

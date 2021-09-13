@@ -1,4 +1,4 @@
-package de.jayasinghe.samples.notification.persistence;
+package de.jayasinghe.samples.notification.persistence.redis;
 
 import java.io.Serializable;
 
