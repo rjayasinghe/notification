@@ -1,5 +1,6 @@
 package de.jayasinghe.samples.notification.in.amqp;
 
+
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.ExchangeBuilder;
@@ -7,6 +8,9 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.QueueBuilder;
 import org.springframework.amqp.core.TopicExchange;
 import org.springframework.amqp.rabbit.annotation.EnableRabbit;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,6 +27,17 @@ public class RabbitMqConfig {
 	static final String ORDER_SHIPPED_QUEUE_NAME = "order.shipped";
 	static final String ORDER_DELIVERED_QUEUE_NAME = "order.delivered";
 
+	@Bean
+	public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory) {
+		final var rabbitTemplate = new RabbitTemplate(connectionFactory);
+		rabbitTemplate.setMessageConverter(producerJackson2MessageConverter());
+		return rabbitTemplate;
+	}
+
+	@Bean
+	public Jackson2JsonMessageConverter producerJackson2MessageConverter() {
+		return new Jackson2JsonMessageConverter();
+	}
 
 	@Bean
 	Queue orderPlacedQueue() {
