@@ -9,11 +9,13 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.testcontainers.containers.GenericContainer;
 
 @SpringBootTest
 class PlainNotificationRepositoryTest {
 
 	/*
+	private static final Integer PORT = 6379;
 	static GenericContainer<?> redisContainer = new GenericContainer<>("redis:6-alpine")
         .withExposedPorts(PORT)
         .withReuse(true);
