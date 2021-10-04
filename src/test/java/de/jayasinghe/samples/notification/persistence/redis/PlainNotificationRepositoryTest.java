@@ -13,6 +13,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class PlainNotificationRepositoryTest {
 
+	/*
+	static GenericContainer<?> redisContainer = new GenericContainer<>("redis:6-alpine")
+        .withExposedPorts(PORT)
+        .withReuse(true);
+	*/
+
+
 	@Autowired
 	private NotificationRepository repository;
 
