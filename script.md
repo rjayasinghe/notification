@@ -1,10 +1,6 @@
 * integration tests with external components (PlainNotificationRepositoryTest)
 ** embedded implementations
 ** abstractions are false friends
-** manually managed external compenents (download redis? haha.. no)
-* integration tests with (docker) containers
-** maven plugin
-** manual docker compose (start docker compose and run PlainNotificationRepositoryTest)
 * test containers (testcontainers.org)
 ** tool agnostic
 ** pure java solution
