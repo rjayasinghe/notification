@@ -1,6 +1,6 @@
 * integration tests with external components (PlainNotificationRepositoryTest)
-** embedded implementations
-** abstractions are false friends
+** there are different options (embedded, in-memory, abstractions)
+** use the real thing, but comfortably!
 * test containers (testcontainers.org)
 ** tool agnostic
 ** pure java solution
