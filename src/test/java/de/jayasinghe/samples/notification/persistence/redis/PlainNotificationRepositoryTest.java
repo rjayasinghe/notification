@@ -26,7 +26,6 @@ class PlainNotificationRepositoryTest {
 	private NotificationRepository repository;
 
 	@Test
-	@Disabled("does not work without manually started container")
 	void testThatSavedEntityCanBeReadAgain() {
 		Notification notification = new Notification("orderId", "foo", "1234");
 		repository.save(notification);
