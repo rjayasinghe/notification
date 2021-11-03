@@ -2,7 +2,7 @@ package de.jayasinghe.samples.notification.events;
 
 import de.jayasinghe.samples.notification.Notification;
 
-public class NotificationShippedTriggered {
+public class NotificationShippedTriggered implements NotificationEvent {
 
 	private final Notification notification;
 
@@ -10,6 +10,7 @@ public class NotificationShippedTriggered {
 		this.notification = notification;
 	}
 
+	@Override
 	public Notification getNotification() {
 		return notification;
 	}
